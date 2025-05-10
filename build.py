@@ -5,8 +5,6 @@ import time
 import json
 import re
 
-BASE_URL = "https://quotes.toscrape.com"
-INDEX_FILE = "inverted_index.json"
 DELAY = 6  # seconds
 
 STOP_WORDS = set([
@@ -21,13 +19,13 @@ def normalize_word(word):
     return re.sub(r'\W+', '', word).lower()
 
 # Function to find next page
-def next_page(soup):
+def next_page(soup, BASE_URL):
     next_page = soup.find('li', class_='next')
     return BASE_URL + next_page.a['href'] if next_page else None
 
 # Function to crawl the website and build the inverted index
-def crawl_and_build_index():
-    page_url = BASE_URL
+def crawl_and_build_index(base_url, index_file):
+    page_url = base_url
     '''
     Nested Dictionary
     e.g., {
@@ -61,12 +59,14 @@ def crawl_and_build_index():
             visited_urls.add(page_url)
 
         # Find the next page link
-        page_url = next_page(soup)
+        page_url = next_page(soup, base_url)
 
         # politness window
         time.sleep(DELAY)
 
     # Save the inverted index to a file
-    with open(INDEX_FILE, 'w') as f:
+    with open(index_file, 'w') as f:
         json.dump(inverted_index, f, indent=4)
-    print(f"Inverted index saved to {INDEX_FILE}")
+    print(f"Inverted index saved to {index_file}")
+
+    return len(visited_urls)
