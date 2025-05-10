@@ -80,11 +80,11 @@ Inverted index saved to inverted_index.json
 > load
 Inverted index loaded from inverted_index.json
 
-> print truth
+> print world
 URL: https://quotes.toscrape.com/page/2/ — Count: 1
 URL: https://quotes.toscrape.com/page/4/ — Count: 1
 
-> find truth mistakes
+> find good world
 Ranked pages:
   URL: https://quotes.toscrape.com/page/2/ — Total Count: 2
 ```
