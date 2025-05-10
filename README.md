@@ -1,12 +1,12 @@
 # COMP3011: Web Search Tool
 ## Features
 
-- Crawls [https://quotes.toscrape.com](https://quotes.toscrape.com)
+- Crawls [https://quotes.toscrape.com]
 - Builds an inverted index mapping words to the pages and their frequencies
 - Skips stop words to improve index quality
 - Normalizes all words (removes punctuation, lowercase)
 - Saves and loads the index using JSON
-- Provides ranked search results using **term frequency**
+- Provides ranked search results using **term frequency-inverse document frequency**
 - Supports interactive command-line menu
 
 ---
@@ -54,10 +54,10 @@ You can type either the number or the command name (e.g., `build`, `find good fr
 
 ## Search Ranking Method
 
-The search results are ranked using **term frequency (TF)**:
+The search results are ranked using **term frequency-inverse document frequency (TF_IDF)**:
 
 ```
-Relevance Score = Sum of the frequency of each query word on that page
+Score = Sum of the frequency of each query word on that page scaled by the rarity of the word
 ```
 
 Pages are sorted in descending order of their score, ensuring that the most relevant results appear first.
@@ -99,10 +99,3 @@ Ranked pages:
 - `json`, `re`, `os`, `time`, `collections` — built-in Python libraries
 
 ---
-
-## ✅ Author
-
-**Rayaan**  
-University of Leeds  
-School of Computing  
-COMP3011 – 2024/25
